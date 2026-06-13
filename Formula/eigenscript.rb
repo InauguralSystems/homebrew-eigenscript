@@ -14,7 +14,7 @@ class Eigenscript < Formula
     # the tag — patch the released Makefile here. Once the next tagged
     # release ships with the gating, this inreplace will stop matching and
     # the formula will fail loudly, prompting the bump.
-    on_macos do
+    if OS.mac?
       inreplace "Makefile",
                 "LDFLAGS := -pie -Wl,-z,relro,-z,now -lm -lpthread",
                 "LDFLAGS := -lm -lpthread"
