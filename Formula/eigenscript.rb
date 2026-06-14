@@ -1,25 +1,14 @@
 class Eigenscript < Formula
   desc "Bytecode VM language with copy-and-patch JIT, observers, and temporal queries"
   homepage "https://github.com/InauguralSystems/EigenScript"
-  url "https://github.com/InauguralSystems/EigenScript/archive/refs/tags/v0.13.0.tar.gz"
-  sha256 "fe32cc505417da0a876dc671f899bd8dd2e11e608a6950dafb6d93d206a498ce"
+  url "https://github.com/InauguralSystems/EigenScript/archive/refs/tags/v0.14.2.tar.gz"
+  sha256 "f43c2c9b7790afda1944719fe1d9d65266c8bc452eeda5d2dd78e3f2acd899c4"
   license "MIT"
   head "https://github.com/InauguralSystems/EigenScript.git", branch: "main"
 
   uses_from_macos "zlib"
 
   def install
-    # v0.13.0's Makefile has unconditional `-Wl,-z,relro,-z,now` in LDFLAGS,
-    # which is GNU-ld-only. The Linux-gating fix is in main but landed after
-    # the tag — patch the released Makefile here. Once the next tagged
-    # release ships with the gating, this inreplace will stop matching and
-    # the formula will fail loudly, prompting the bump.
-    if OS.mac?
-      inreplace "Makefile",
-                "LDFLAGS := -pie -Wl,-z,relro,-z,now -lm -lpthread",
-                "LDFLAGS := -lm -lpthread"
-    end
-
     system "make", "install", "PREFIX=#{prefix}", "CC=#{ENV.cc}"
   end
 
