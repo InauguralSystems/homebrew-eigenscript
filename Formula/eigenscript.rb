@@ -1,8 +1,8 @@
 class Eigenscript < Formula
   desc "Bytecode VM language with copy-and-patch JIT, observers, and temporal queries"
   homepage "https://github.com/InauguralSystems/EigenScript"
-  url "https://github.com/InauguralSystems/EigenScript/archive/refs/tags/v0.23.0.tar.gz"
-  sha256 "a7f46780687173d5e20c351d9c46ce2accca6e7c215c38b03341137208a7f789"
+  url "https://github.com/InauguralSystems/EigenScript/archive/refs/tags/v0.24.0.tar.gz"
+  sha256 "d3d52c9f86e51eac28d241d73252bf191ea6d37221e080dba903fb2f7f0b24ca"
   license "MIT"
   head "https://github.com/InauguralSystems/EigenScript.git", branch: "main"
 
