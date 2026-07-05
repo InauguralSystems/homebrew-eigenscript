@@ -19,7 +19,9 @@ eigenscript path/to/script.eigs
 
 - `eigenscript` — the interpreter + JIT
 - `eigenlsp` — the LSP server (point your editor at it via the bundled VS Code / Vim grammars in [the main repo](https://github.com/InauguralSystems/EigenScript/tree/main/editors))
-- The standard library at `$(brew --prefix)/lib/eigenscript/` (imported as `import calculus`, `import http`, etc.)
+- The standard library at `$(brew --prefix)/lib/eigenscript/` (imported as `import calculus`, `import json`, etc.)
+
+The formula runs the default `make install` build, so the optional HTTP/model/DB server extensions are off. `import http` works, but its server builtins (`start_server`, `route_get`, …) require the `make full` build, which the tap does not ship.
 
 ## Platforms
 
@@ -29,7 +31,7 @@ eigenscript path/to/script.eigs
 
 ## Versioning
 
-The tap tracks tagged releases of the parent repo. Use `brew install --HEAD eigenscript` to build from `main` instead.
+The tap tracks tagged releases of the parent repo; bumping the formula to a new tag is a manual release step. Use `brew install --HEAD eigenscript` to build from `main` instead.
 
 ## License
 
