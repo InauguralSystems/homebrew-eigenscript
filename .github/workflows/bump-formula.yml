@@ -1,0 +1,37 @@
+name: Bump EigenScript formula
+
+on:
+  schedule:
+    - cron: '23 6 * * *'
+  workflow_dispatch:
+    inputs:
+      validation_base:
+        description: 'Optional reserved automation/validation-1297-* base; empty uses main'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: bump-eigenscript-formula
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    if: github.repository == 'InauguralSystems/homebrew-eigenscript' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+        with:
+          ref: main
+      - name: Check automation
+        run: python3 -B scripts/test_bump_formula.py
+      - name: Open a formula bump PR when behind
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VALIDATION_BASE: ${{ inputs.validation_base || '' }}
+        run: python3 scripts/bump_formula.py
