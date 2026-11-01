@@ -1,4 +1,5 @@
-# Matrix legs of .github/workflows/tests.yml that skip `brew test-bot --only-tap-syntax`.
+# Matrix legs of .github/workflows/tests.yml that skip `brew test-bot --only-tap-syntax`
+# on pull_request runs. Push and workflow_dispatch runs never skip it on any leg.
 # Reviewed list: one leg per line, then the reason. scripts/tap_syntax_legs.py reads it
 # and fails the run if an entry has no reason, names a leg not in the matrix, or if
 # every leg would skip. A leg not listed here runs tap-syntax.

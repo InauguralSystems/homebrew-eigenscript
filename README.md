@@ -43,9 +43,10 @@ PR, then merge after the formula checks pass. GitHub documents this
 [approval requirement for token-created PRs](https://docs.github.com/en/actions/concepts/security/github_token#when-github_token-triggers-workflow-runs).
 The test-bot's manual dispatch runs syntax/setup checks; its formula checks run
 on `pull_request`. The tap-syntax step (`brew style`, `brew readall --os=all
---arch=all`, full-tap `brew audit`) runs on every matrix leg except those named,
+--arch=all`, full-tap `brew audit`) runs on every leg of every push and manual
+dispatch. On `pull_request` it runs on every matrix leg except those named,
 with a reason, in `.github/tap-syntax-skip-allowlist.txt`; today that is the two
-macOS legs, so it runs once, on `ubuntu-latest`. Each macOS leg still runs
+macOS legs, so a PR runs it once, on `ubuntu-latest`. Each macOS leg still runs
 `brew style --formula` and `brew audit --formula` in the formula step of every PR
 that changes the formula. `scripts/tap_syntax_legs.py` makes the per-leg decision
 and fails the run if every leg would skip, an entry has no reason, or an entry
