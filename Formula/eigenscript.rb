@@ -8,6 +8,8 @@ class Eigenscript < Formula
 
   uses_from_macos "zlib"
 
+  # hq#58 S2 measurement only: exercises the formula path. Never merge.
+
   def install
     system "make", "install", "PREFIX=#{prefix}", "CC=#{ENV.cc}"
   end
