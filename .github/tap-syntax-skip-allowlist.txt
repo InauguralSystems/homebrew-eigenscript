@@ -1,0 +1,13 @@
+# Matrix legs of .github/workflows/tests.yml that skip `brew test-bot --only-tap-syntax`.
+# Reviewed list: one leg per line, then the reason. scripts/tap_syntax_legs.py reads it
+# and fails the run if an entry has no reason, names a leg not in the matrix, or if
+# every leg would skip. A leg not listed here runs tap-syntax.
+#
+# What tap-syntax runs: `brew style <tap>` (RuboCop, shellcheck, actionlint) and
+# `brew readall --os=all --arch=all <tap>` do not depend on the host. The full-tap
+# `brew audit` evaluates the formula on the host OS; on a macOS leg that host-OS audit
+# still runs on every PR that changes a formula, as `brew audit --formula --online --git`
+# plus `brew style --formula` inside the --only-formulae step. ubuntu-latest keeps the
+# full tap-syntax step on every run (hq#58, SM-HB-3).
+macos-15-intel Host-independent checks already run on ubuntu-latest; this leg's host-OS formula audit runs in --only-formulae on formula PRs. Was 314 s p50 of the 717 s critical-path leg.
+macos-latest Host-independent checks already run on ubuntu-latest; this leg's host-OS formula audit runs in --only-formulae on formula PRs. Was 27 s p50.
